@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../models/usuario.dart';
 
@@ -8,27 +8,27 @@ class SessionStore {
   static const _tokenKey = 'auth_token';
   static const _userKey = 'auth_user';
 
+  final _storage = const FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  );
+
   Future<void> saveSession(String token, Usuario user) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_tokenKey, token);
-    await prefs.setString(_userKey, jsonEncode(user.toJson()));
+    await _storage.write(key: _tokenKey, value: token);
+    await _storage.write(key: _userKey, value: jsonEncode(user.toJson()));
   }
 
   Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_tokenKey);
+    return _storage.read(key: _tokenKey);
   }
 
   Future<Usuario?> getUser() async {
-    final prefs = await SharedPreferences.getInstance();
-    final raw = prefs.getString(_userKey);
+    final raw = await _storage.read(key: _userKey);
     if (raw == null) return null;
     return Usuario.fromJson(jsonDecode(raw) as Map<String, dynamic>);
   }
 
   Future<void> clear() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_tokenKey);
-    await prefs.remove(_userKey);
+    await _storage.delete(key: _tokenKey);
+    await _storage.delete(key: _userKey);
   }
 }

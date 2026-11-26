@@ -23,11 +23,18 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _loading = true;
   String? _error;
   List<Almuerzo> _items = [];
+  String _query = '';
 
   @override
   void initState() {
     super.initState();
     _load();
+  }
+
+  List<Almuerzo> get _filtered {
+    if (_query.trim().isEmpty) return _items;
+    final q = _query.toLowerCase();
+    return _items.where((a) => a.cliente.toLowerCase().contains(q) || a.plato.toLowerCase().contains(q)).toList();
   }
 
   Future<void> _load() async {
@@ -53,9 +60,19 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => _CreateAlmuerzoSheet(api: widget.api),
+      builder: (_) => _AlmuerzoFormSheet(api: widget.api),
     );
     if (created == true) _load();
+  }
+
+  Future<void> _edit(Almuerzo a) async {
+    final updated = await showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => _AlmuerzoFormSheet(api: widget.api, existing: a),
+    );
+    if (updated == true) _load();
   }
 
   Future<void> _toggle(Almuerzo a) async {
@@ -99,12 +116,15 @@ class _HomeScreenState extends State<HomeScreen> {
     final totalVendido = _items.fold<double>(0, (s, e) => s + e.total);
     final pages = [
       _OrdersPage(
-        items: _items,
+        items: _filtered,
         loading: _loading,
         error: _error,
         onRefresh: _load,
         onToggle: _toggle,
         onDelete: _delete,
+        onEdit: _edit,
+        query: _query,
+        onQueryChanged: (v) => setState(() => _query = v),
       ),
       ProfileScreen(
         user: widget.user,
@@ -121,7 +141,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: AppBackdrop(child: pages[_index]),
       floatingActionButton: _index == 0
-          ? FloatingActionButton.extended(onPressed: _create, icon: const Icon(Icons.add_rounded), label: const Text('Nuevo pedido'))
+          ? FloatingActionButton.extended(
+              onPressed: _create,
+              icon: const Icon(Icons.add_rounded),
+              label: const Text('Nuevo pedido'),
+            )
           : null,
       bottomNavigationBar: NavigationBar(
         selectedIndex: _index,
@@ -137,6 +161,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+// ── Lista de pedidos ──────────────────────────────────────────────────────────
+
 class _OrdersPage extends StatelessWidget {
   final List<Almuerzo> items;
   final bool loading;
@@ -144,6 +170,9 @@ class _OrdersPage extends StatelessWidget {
   final Future<void> Function() onRefresh;
   final void Function(Almuerzo) onToggle;
   final void Function(Almuerzo) onDelete;
+  final void Function(Almuerzo) onEdit;
+  final String query;
+  final ValueChanged<String> onQueryChanged;
 
   const _OrdersPage({
     required this.items,
@@ -152,6 +181,9 @@ class _OrdersPage extends StatelessWidget {
     required this.onRefresh,
     required this.onToggle,
     required this.onDelete,
+    required this.onEdit,
+    required this.query,
+    required this.onQueryChanged,
   });
 
   @override
@@ -165,22 +197,40 @@ class _OrdersPage extends StatelessWidget {
           Text('Mis pedidos', style: t.headlineMedium),
           const SizedBox(height: 4),
           Text('Pedidos de almuerzo asociados a tu cuenta.', style: t.bodyMedium),
-          const SizedBox(height: 16),
+          const SizedBox(height: 14),
+          TextField(
+            onChanged: onQueryChanged,
+            decoration: InputDecoration(
+              hintText: 'Buscar por cliente o plato...',
+              prefixIcon: const Icon(Icons.search_rounded),
+              suffixIcon: query.isNotEmpty
+                  ? IconButton(icon: const Icon(Icons.close_rounded), onPressed: () => onQueryChanged(''))
+                  : null,
+            ),
+          ),
+          const SizedBox(height: 14),
           if (loading)
             const Padding(padding: EdgeInsets.only(top: 60), child: Center(child: CircularProgressIndicator()))
           else if (error != null)
             _StateCard(icon: Icons.error_outline_rounded, title: 'No se pudo cargar', message: error!, color: AppColors.danger)
           else if (items.isEmpty)
-            const _StateCard(
+            _StateCard(
               icon: Icons.lunch_dining_outlined,
-              title: 'Sin pedidos aún',
-              message: 'Crea tu primer pedido con el botón "Nuevo pedido".',
+              title: query.isNotEmpty ? 'Sin resultados' : 'Sin pedidos aún',
+              message: query.isNotEmpty
+                  ? 'No hay pedidos que coincidan con "$query".'
+                  : 'Crea tu primer pedido con el botón "Nuevo pedido".',
               color: AppColors.secondary,
             )
           else
             ...items.map((a) => Padding(
                   padding: const EdgeInsets.only(bottom: 12),
-                  child: AlmuerzoCard(almuerzo: a, onToggleEntregado: () => onToggle(a), onDelete: () => onDelete(a)),
+                  child: AlmuerzoCard(
+                    almuerzo: a,
+                    onToggleEntregado: () => onToggle(a),
+                    onDelete: () => onDelete(a),
+                    onEdit: () => onEdit(a),
+                  ),
                 )),
         ],
       ),
@@ -212,21 +262,37 @@ class _StateCard extends StatelessWidget {
   }
 }
 
-class _CreateAlmuerzoSheet extends StatefulWidget {
+// ── Formulario crear / editar ─────────────────────────────────────────────────
+
+class _AlmuerzoFormSheet extends StatefulWidget {
   final ApiService api;
-  const _CreateAlmuerzoSheet({required this.api});
+  final Almuerzo? existing; // null = crear, non-null = editar
+
+  const _AlmuerzoFormSheet({required this.api, this.existing});
 
   @override
-  State<_CreateAlmuerzoSheet> createState() => _CreateAlmuerzoSheetState();
+  State<_AlmuerzoFormSheet> createState() => _AlmuerzoFormSheetState();
 }
 
-class _CreateAlmuerzoSheetState extends State<_CreateAlmuerzoSheet> {
+class _AlmuerzoFormSheetState extends State<_AlmuerzoFormSheet> {
   final _formKey = GlobalKey<FormState>();
-  final _cliente = TextEditingController();
-  final _plato = TextEditingController();
-  final _cantidad = TextEditingController(text: '1');
-  final _precio = TextEditingController();
+  late final TextEditingController _cliente;
+  late final TextEditingController _plato;
+  late final TextEditingController _cantidad;
+  late final TextEditingController _precio;
   bool _loading = false;
+
+  bool get _isEdit => widget.existing != null;
+
+  @override
+  void initState() {
+    super.initState();
+    final e = widget.existing;
+    _cliente = TextEditingController(text: e?.cliente ?? '');
+    _plato = TextEditingController(text: e?.plato ?? '');
+    _cantidad = TextEditingController(text: e != null ? '${e.cantidad}' : '1');
+    _precio = TextEditingController(text: e != null ? e.precio.toStringAsFixed(2) : '');
+  }
 
   @override
   void dispose() {
@@ -241,12 +307,21 @@ class _CreateAlmuerzoSheetState extends State<_CreateAlmuerzoSheet> {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _loading = true);
     try {
-      await widget.api.createAlmuerzo(
-        cliente: _cliente.text.trim(),
-        plato: _plato.text.trim(),
-        cantidad: int.parse(_cantidad.text),
-        precio: double.parse(_precio.text.replaceAll(',', '.')),
-      );
+      if (_isEdit) {
+        await widget.api.updateAlmuerzo(widget.existing!.id, {
+          'cliente': _cliente.text.trim(),
+          'plato': _plato.text.trim(),
+          'cantidad': int.parse(_cantidad.text),
+          'precio': double.parse(_precio.text.replaceAll(',', '.')),
+        });
+      } else {
+        await widget.api.createAlmuerzo(
+          cliente: _cliente.text.trim(),
+          plato: _plato.text.trim(),
+          cantidad: int.parse(_cantidad.text),
+          precio: double.parse(_precio.text.replaceAll(',', '.')),
+        );
+      }
       if (!mounted) return;
       Navigator.pop(context, true);
     } catch (e) {
@@ -275,13 +350,30 @@ class _CreateAlmuerzoSheetState extends State<_CreateAlmuerzoSheet> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Center(child: Container(width: 44, height: 4, decoration: BoxDecoration(color: AppColors.border, borderRadius: BorderRadius.circular(99)))),
+                Center(
+                  child: Container(
+                    width: 44,
+                    height: 4,
+                    decoration: BoxDecoration(color: AppColors.border, borderRadius: BorderRadius.circular(99)),
+                  ),
+                ),
                 const SizedBox(height: 16),
-                Text('Nuevo pedido', style: Theme.of(context).textTheme.titleLarge),
+                Text(
+                  _isEdit ? 'Editar pedido' : 'Nuevo pedido',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
                 const SizedBox(height: 16),
-                TextFormField(controller: _cliente, decoration: const InputDecoration(labelText: 'Cliente'), validator: (v) => v == null || v.trim().isEmpty ? 'Requerido' : null),
+                TextFormField(
+                  controller: _cliente,
+                  decoration: const InputDecoration(labelText: 'Cliente'),
+                  validator: (v) => v == null || v.trim().isEmpty ? 'Requerido' : null,
+                ),
                 const SizedBox(height: 12),
-                TextFormField(controller: _plato, decoration: const InputDecoration(labelText: 'Plato'), validator: (v) => v == null || v.trim().isEmpty ? 'Requerido' : null),
+                TextFormField(
+                  controller: _plato,
+                  decoration: const InputDecoration(labelText: 'Plato'),
+                  validator: (v) => v == null || v.trim().isEmpty ? 'Requerido' : null,
+                ),
                 const SizedBox(height: 12),
                 Row(
                   children: [
@@ -307,7 +399,9 @@ class _CreateAlmuerzoSheetState extends State<_CreateAlmuerzoSheet> {
                 const SizedBox(height: 18),
                 ElevatedButton(
                   onPressed: _loading ? null : _submit,
-                  child: _loading ? const SizedBox(width: 22, height: 22, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white)) : const Text('Guardar pedido'),
+                  child: _loading
+                      ? const SizedBox(width: 22, height: 22, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                      : Text(_isEdit ? 'Guardar cambios' : 'Guardar pedido'),
                 ),
               ],
             ),

@@ -8,12 +8,14 @@ class AlmuerzoCard extends StatelessWidget {
   final Almuerzo almuerzo;
   final VoidCallback onToggleEntregado;
   final VoidCallback onDelete;
+  final VoidCallback onEdit;
 
   const AlmuerzoCard({
     super.key,
     required this.almuerzo,
     required this.onToggleEntregado,
     required this.onDelete,
+    required this.onEdit,
   });
 
   @override
@@ -70,7 +72,12 @@ class AlmuerzoCard extends StatelessWidget {
                     label: Text(almuerzo.entregado ? 'Marcar pendiente' : 'Marcar entregado'),
                   ),
                 ),
-                const SizedBox(width: 10),
+                const SizedBox(width: 8),
+                IconButton(
+                  onPressed: onEdit,
+                  icon: const Icon(Icons.edit_outlined, color: AppColors.secondary),
+                  tooltip: 'Editar pedido',
+                ),
                 IconButton(
                   onPressed: onDelete,
                   icon: const Icon(Icons.delete_outline_rounded, color: AppColors.danger),
