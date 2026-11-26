@@ -1,0 +1,568 @@
+{
+  "communities": {
+    "0": [
+      "api_app_core_security_decode_access_token",
+      "api_app_db_database",
+      "api_app_db_database_base",
+      "api_app_db_database_ensure_database_exists",
+      "api_app_db_database_get_db",
+      "api_app_db_seed",
+      "api_app_db_seed_py_session",
+      "api_app_db_seed_seed_data",
+      "api_app_dependencies_auth",
+      "api_app_dependencies_auth_get_current_user",
+      "api_app_dependencies_auth_py_session",
+      "api_app_main",
+      "api_app_main_health",
+      "api_app_main_lifespan",
+      "api_app_main_py_get",
+      "api_app_models_almuerzo",
+      "api_app_models_almuerzo_almuerzo",
+      "api_app_models_usuario",
+      "api_app_models_usuario_usuario",
+      "api_app_routers_almuerzos",
+      "api_app_routers_almuerzos_create_almuerzo",
+      "api_app_routers_almuerzos_delete_almuerzo",
+      "api_app_routers_almuerzos_get_almuerzo",
+      "api_app_routers_almuerzos_get_owned_almuerzo",
+      "api_app_routers_almuerzos_list_almuerzos",
+      "api_app_routers_almuerzos_py_get",
+      "api_app_routers_almuerzos_py_post",
+      "api_app_routers_almuerzos_py_session",
+      "api_app_routers_almuerzos_update_almuerzo",
+      "api_app_routers_init",
+      "api_app_schemas_almuerzo",
+      "api_app_schemas_almuerzo_almuerzobase",
+      "api_app_schemas_almuerzo_almuerzocreate",
+      "api_app_schemas_almuerzo_almuerzoresponse",
+      "api_app_schemas_almuerzo_almuerzoresponse_total",
+      "api_app_schemas_almuerzo_almuerzoupdate",
+      "api_app_schemas_almuerzo_py_basemodel",
+      "computed_field",
+      "contextlib",
+      "datetime",
+      "decimal",
+      "declarativebase",
+      "delete",
+      "fastapi",
+      "fastapi_security",
+      "httpauthorizationcredentials",
+      "put",
+      "pydantic",
+      "sqlalchemy",
+      "sqlalchemy_orm"
+    ],
+    "1": [
+      "core_app_theme_dart",
+      "icondata",
+      "lib_screens_home_screen_orderspage",
+      "lib_screens_home_screen_statecard",
+      "lib_screens_profile_screen",
+      "lib_screens_profile_screen_build",
+      "lib_screens_profile_screen_email",
+      "lib_screens_profile_screen_entregados",
+      "lib_screens_profile_screen_fooditem",
+      "lib_screens_profile_screen_foodplateprofile",
+      "lib_screens_profile_screen_icon",
+      "lib_screens_profile_screen_label",
+      "lib_screens_profile_screen_name",
+      "lib_screens_profile_screen_onlogout",
+      "lib_screens_profile_screen_profilescreen",
+      "lib_screens_profile_screen_rol",
+      "lib_screens_profile_screen_row",
+      "lib_screens_profile_screen_statcard",
+      "lib_screens_profile_screen_totalpedidos",
+      "lib_screens_profile_screen_totalvendido",
+      "lib_screens_profile_screen_user",
+      "lib_screens_profile_screen_value",
+      "lib_widgets_almuerzo_card",
+      "lib_widgets_almuerzo_card_almuerzo",
+      "lib_widgets_almuerzo_card_almuerzocard",
+      "lib_widgets_almuerzo_card_build",
+      "lib_widgets_almuerzo_card_entregado",
+      "lib_widgets_almuerzo_card_highlight",
+      "lib_widgets_almuerzo_card_info",
+      "lib_widgets_almuerzo_card_label",
+      "lib_widgets_almuerzo_card_ondelete",
+      "lib_widgets_almuerzo_card_ontoggleentregado",
+      "lib_widgets_almuerzo_card_statuschip",
+      "lib_widgets_almuerzo_card_value",
+      "lib_widgets_app_backdrop",
+      "lib_widgets_app_backdrop_appbackdrop",
+      "lib_widgets_app_backdrop_blob",
+      "lib_widgets_app_backdrop_build",
+      "lib_widgets_app_backdrop_child",
+      "models_almuerzo_dart",
+      "package_flutter_material_dart",
+      "package_intl_intl_dart",
+      "statelesswidget",
+      "voidcallback",
+      "widget"
+    ],
+    "2": [
+      "color",
+      "lib_screens_home_screen",
+      "lib_screens_home_screen_api",
+      "lib_screens_home_screen_build",
+      "lib_screens_home_screen_cantidad",
+      "lib_screens_home_screen_cliente",
+      "lib_screens_home_screen_color",
+      "lib_screens_home_screen_create",
+      "lib_screens_home_screen_createstate",
+      "lib_screens_home_screen_delete",
+      "lib_screens_home_screen_dispose",
+      "lib_screens_home_screen_error",
+      "lib_screens_home_screen_formkey",
+      "lib_screens_home_screen_icon",
+      "lib_screens_home_screen_index",
+      "lib_screens_home_screen_initstate",
+      "lib_screens_home_screen_items",
+      "lib_screens_home_screen_load",
+      "lib_screens_home_screen_loading",
+      "lib_screens_home_screen_message",
+      "lib_screens_home_screen_onlogout",
+      "lib_screens_home_screen_plato",
+      "lib_screens_home_screen_precio",
+      "lib_screens_home_screen_snack",
+      "lib_screens_home_screen_submit",
+      "lib_screens_home_screen_title",
+      "lib_screens_home_screen_toggle",
+      "lib_screens_home_screen_user",
+      "list",
+      "profile_screen_dart",
+      "string",
+      "widgets_almuerzo_card_dart"
+    ],
+    "3": [
+      "core_api_config_dart",
+      "dart_convert",
+      "lib_services_api_service",
+      "lib_services_api_service_apiexception",
+      "lib_services_api_service_createalmuerzo",
+      "lib_services_api_service_decode",
+      "lib_services_api_service_deletealmuerzo",
+      "lib_services_api_service_error",
+      "lib_services_api_service_getalmuerzos",
+      "lib_services_api_service_headers",
+      "lib_services_api_service_login",
+      "lib_services_api_service_logout",
+      "lib_services_api_service_message",
+      "lib_services_api_service_register",
+      "lib_services_api_service_session",
+      "lib_services_api_service_statuscode",
+      "lib_services_api_service_tostring",
+      "lib_services_api_service_updatealmuerzo",
+      "lib_services_api_service_uri",
+      "lib_services_api_service_userfromtoken",
+      "lib_services_session_store",
+      "lib_services_session_store_clear",
+      "lib_services_session_store_gettoken",
+      "lib_services_session_store_getuser",
+      "lib_services_session_store_savesession",
+      "lib_services_session_store_sessionstore",
+      "lib_services_session_store_tokenkey",
+      "lib_services_session_store_userkey",
+      "models_usuario_dart",
+      "package_http_http_dart",
+      "package_shared_preferences_shared_preferences_dart",
+      "session_store_dart"
+    ],
+    "4": [
+      "formstate",
+      "lib_screens_login_screen",
+      "lib_screens_login_screen_api",
+      "lib_screens_login_screen_build",
+      "lib_screens_login_screen_createstate",
+      "lib_screens_login_screen_dispose",
+      "lib_screens_login_screen_email",
+      "lib_screens_login_screen_formkey",
+      "lib_screens_login_screen_loading",
+      "lib_screens_login_screen_obscure",
+      "lib_screens_login_screen_onauthed",
+      "lib_screens_login_screen_password",
+      "lib_screens_login_screen_submit",
+      "lib_screens_register_screen",
+      "lib_screens_register_screen_api",
+      "lib_screens_register_screen_build",
+      "lib_screens_register_screen_createstate",
+      "lib_screens_register_screen_dispose",
+      "lib_screens_register_screen_email",
+      "lib_screens_register_screen_formkey",
+      "lib_screens_register_screen_loading",
+      "lib_screens_register_screen_nombre",
+      "lib_screens_register_screen_obscure",
+      "lib_screens_register_screen_onauthed",
+      "lib_screens_register_screen_password",
+      "lib_screens_register_screen_submit",
+      "lib_services_api_service_apiservice",
+      "materialpageroute",
+      "register_screen_dart",
+      "services_api_service_dart",
+      "widgets_app_backdrop_dart"
+    ],
+    "5": [
+      "lib_main",
+      "lib_main_api",
+      "lib_main_authed",
+      "lib_main_bootstrap",
+      "lib_main_build",
+      "lib_main_createstate",
+      "lib_main_handleauthed",
+      "lib_main_handlelogout",
+      "lib_main_initializedateformatting",
+      "lib_main_initstate",
+      "lib_main_loading",
+      "lib_main_main",
+      "lib_main_myapp",
+      "lib_main_myappstate",
+      "lib_main_session",
+      "lib_main_user",
+      "lib_screens_home_screen_createalmuerzosheet",
+      "lib_screens_home_screen_createalmuerzosheetstate",
+      "lib_screens_home_screen_homescreen",
+      "lib_screens_home_screen_homescreenstate",
+      "lib_screens_login_screen_loginscreen",
+      "lib_screens_login_screen_loginscreenstate",
+      "lib_screens_register_screen_registerscreen",
+      "lib_screens_register_screen_registerscreenstate",
+      "package_intl_date_symbol_data_local_dart",
+      "screens_home_screen_dart",
+      "screens_login_screen_dart",
+      "services_session_store_dart",
+      "state",
+      "statefulwidget"
+    ],
+    "6": [
+      "pubspec",
+      "pubspec_dependencies",
+      "pubspec_dependencies_cupertino_icons",
+      "pubspec_dependencies_flutter",
+      "pubspec_dependencies_google_fonts",
+      "pubspec_dependencies_http",
+      "pubspec_dependencies_intl",
+      "pubspec_dependencies_shared_preferences",
+      "pubspec_description",
+      "pubspec_dev_dependencies",
+      "pubspec_dev_dependencies_flutter_lints",
+      "pubspec_dev_dependencies_flutter_test",
+      "pubspec_environment",
+      "pubspec_environment_sdk",
+      "pubspec_flutter",
+      "pubspec_flutter_sdk",
+      "pubspec_flutter_test_sdk",
+      "pubspec_flutter_uses_material_design",
+      "pubspec_name",
+      "pubspec_publish_to",
+      "pubspec_version"
+    ],
+    "7": [
+      "api_app_core_security",
+      "api_app_core_security_create_access_token",
+      "api_app_core_security_hash_password",
+      "api_app_core_security_invalidtokenerror",
+      "api_app_core_security_py_exception",
+      "api_app_core_security_verify_password",
+      "api_app_routers_auth",
+      "api_app_routers_auth_login",
+      "api_app_routers_auth_py_post",
+      "api_app_routers_auth_py_session",
+      "api_app_routers_auth_register",
+      "api_app_schemas_usuario",
+      "api_app_schemas_usuario_loginrequest",
+      "api_app_schemas_usuario_py_basemodel",
+      "api_app_schemas_usuario_registerrequest",
+      "api_app_schemas_usuario_tokenresponse",
+      "api_app_schemas_usuario_usuarioresponse",
+      "jose",
+      "passlib_context",
+      "timedelta"
+    ],
+    "8": [
+      "lib_core_app_theme",
+      "lib_core_app_theme_appcolors",
+      "lib_core_app_theme_apptheme",
+      "lib_core_app_theme_bg",
+      "lib_core_app_theme_border",
+      "lib_core_app_theme_danger",
+      "lib_core_app_theme_muted",
+      "lib_core_app_theme_primary",
+      "lib_core_app_theme_secondary",
+      "lib_core_app_theme_success",
+      "lib_core_app_theme_surface",
+      "lib_core_app_theme_text",
+      "package_google_fonts_google_fonts_dart",
+      "static_const"
+    ],
+    "9": [
+      "lib_models_almuerzo",
+      "lib_models_almuerzo_almuerzo",
+      "lib_models_almuerzo_cantidad",
+      "lib_models_almuerzo_cliente",
+      "lib_models_almuerzo_entregado",
+      "lib_models_almuerzo_fechapedido",
+      "lib_models_almuerzo_fromjson",
+      "lib_models_almuerzo_id",
+      "lib_models_almuerzo_plato",
+      "lib_models_almuerzo_precio",
+      "lib_models_almuerzo_total",
+      "lib_models_almuerzo_usuarioid"
+    ],
+    "10": [
+      "int",
+      "lib_models_usuario",
+      "lib_models_usuario_email",
+      "lib_models_usuario_fromjson",
+      "lib_models_usuario_id",
+      "lib_models_usuario_nombre",
+      "lib_models_usuario_rol",
+      "lib_models_usuario_tojson",
+      "lib_models_usuario_usuario"
+    ],
+    "11": [
+      "analysis_options",
+      "analysis_options_analyzer",
+      "analysis_options_analyzer_exclude",
+      "analysis_options_include",
+      "analysis_options_linter",
+      "analysis_options_linter_rules",
+      "analysis_options_rules_deprecated_member_use"
+    ],
+    "12": [
+      "api_app_core_config",
+      "api_app_core_config_settings",
+      "api_app_core_config_settings_database_url",
+      "api_app_core_config_settings_server_url",
+      "basesettings",
+      "pydantic_settings"
+    ],
+    "13": [
+      "lib_core_api_config",
+      "lib_core_api_config_apiconfig",
+      "lib_core_api_config_baseurl",
+      "static_const_string"
+    ],
+    "14": [
+      "package_app_pedidos_main_dart",
+      "package_flutter_test_flutter_test_dart",
+      "test_widget_test",
+      "test_widget_test_main"
+    ],
+    "15": [
+      "android_app_src_main_kotlin_com_example_app_pedidos_mainactivity",
+      "android_app_src_main_kotlin_com_example_app_pedidos_mainactivity_mainactivity",
+      "flutteractivity"
+    ],
+    "16": [
+      "android_app_build_gradle"
+    ],
+    "17": [
+      "android_build_gradle"
+    ],
+    "18": [
+      "android_settings_gradle"
+    ],
+    "19": [
+      "api_app_core_init"
+    ],
+    "20": [
+      "api_app_db_init"
+    ],
+    "21": [
+      "api_app_dependencies_init"
+    ],
+    "22": [
+      "api_app_init"
+    ],
+    "23": [
+      "api_app_models_init"
+    ],
+    "24": [
+      "api_app_schemas_init"
+    ],
+    "25": [
+      "none_almuerzo"
+    ],
+    "26": [
+      "none_exception"
+    ],
+    "27": [
+      "none_usuario"
+    ]
+  },
+  "cohesion": {
+    "0": 0.09795918367346938,
+    "1": 0.05353535353535353,
+    "2": 0.0625,
+    "3": 0.06653225806451613,
+    "4": 0.07096774193548387,
+    "5": 0.07816091954022988,
+    "6": 0.09523809523809523,
+    "7": 0.2,
+    "8": 0.14285714285714285,
+    "9": 0.16666666666666666,
+    "10": 0.2222222222222222,
+    "11": 0.2857142857142857,
+    "12": 0.3333333333333333,
+    "13": 0.5,
+    "14": 0.5,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0
+  },
+  "gods": [
+    {
+      "id": "api_app_models_usuario_usuario",
+      "label": "Usuario",
+      "degree": 16
+    },
+    {
+      "id": "api_app_db_database_base",
+      "label": "Base",
+      "degree": 8
+    },
+    {
+      "id": "api_app_models_almuerzo_almuerzo",
+      "label": "Almuerzo",
+      "degree": 8
+    },
+    {
+      "id": "api_app_routers_auth_login",
+      "label": "login()",
+      "degree": 8
+    },
+    {
+      "id": "api_app_routers_auth_register",
+      "label": "register()",
+      "degree": 8
+    },
+    {
+      "id": "api_app_routers_almuerzos_get_owned_almuerzo",
+      "label": "_get_owned_almuerzo()",
+      "degree": 7
+    },
+    {
+      "id": "api_app_db_seed_seed_data",
+      "label": "seed_data()",
+      "degree": 7
+    },
+    {
+      "id": "pubspec_dependencies",
+      "label": "dependencies",
+      "degree": 7
+    },
+    {
+      "id": "api_app_dependencies_auth_get_current_user",
+      "label": "get_current_user()",
+      "degree": 6
+    },
+    {
+      "id": "api_app_routers_almuerzos_create_almuerzo",
+      "label": "create_almuerzo()",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "login()",
+      "target": "Usuario",
+      "source_files": [
+        "API/app/routers/auth.py",
+        "API/app/models/usuario.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "lifespan()",
+      "target": "Base",
+      "source_files": [
+        "API/app/main.py",
+        "API/app/db/database.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source"
+    },
+    {
+      "source": "_get_owned_almuerzo()",
+      "target": "Almuerzo",
+      "source_files": [
+        "API/app/routers/almuerzos.py",
+        "API/app/models/almuerzo.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source"
+    },
+    {
+      "source": "list_almuerzos()",
+      "target": "Almuerzo",
+      "source_files": [
+        "API/app/routers/almuerzos.py",
+        "API/app/models/almuerzo.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source"
+    },
+    {
+      "source": "get_current_user()",
+      "target": "Usuario",
+      "source_files": [
+        "API/app/dependencies/auth.py",
+        "API/app/models/usuario.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `ApiService` connect `login_screen.dart` to `home_screen.dart`, `api_service.dart`, `main.dart`?",
+      "why": "High betweenness centrality (0.049) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 8 inferred relationships involving `Usuario` (e.g. with `get_current_user()` and `create_almuerzo()`) actually correct?",
+      "why": "`Usuario` has 8 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `build`, `email`, `entregados` to the rest of the system?",
+      "why": "141 weakly-connected nodes found - possible missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `almuerzos.py` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09795918367346938 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `SessionStore` connect `api_service.dart` to `main.dart`?",
+      "why": "High betweenness centrality (0.015) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 2 inferred relationships involving `Almuerzo` (e.g. with `_get_owned_almuerzo()` and `list_almuerzos()`) actually correct?",
+      "why": "`Almuerzo` has 2 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `profile_screen.dart` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.05353535353535353 - nodes in this community are weakly interconnected."
+    }
+  ]
+}
