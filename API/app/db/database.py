@@ -9,6 +9,8 @@ class Base(DeclarativeBase):
 
 
 def ensure_database_exists() -> None:
+    if settings.database_url.startswith("postgresql"):
+        return
     server_engine = create_engine(settings.server_url, isolation_level="AUTOCOMMIT", pool_pre_ping=True)
     try:
         with server_engine.connect() as conn:
