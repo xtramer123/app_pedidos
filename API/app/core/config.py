@@ -25,7 +25,9 @@ class Settings(BaseSettings):
         if self.database_url_env:
             url = self.database_url_env
             if url.startswith("postgres://"):
-                url = url.replace("postgres://", "postgresql://", 1)
+                url = url.replace("postgres://", "postgresql+psycopg2://", 1)
+            elif url.startswith("postgresql://"):
+                url = url.replace("postgresql://", "postgresql+psycopg2://", 1)
             return url
         return (
             f"mysql+pymysql://{self.db_user}:{self.db_password}"
