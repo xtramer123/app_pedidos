@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.db.database import Base, SessionLocal, engine, ensure_database_exists
 from app.db.seed import seed_data
@@ -24,6 +25,14 @@ app = FastAPI(
     description="API REST para gestión de pedidos de almuerzos con autenticación JWT.",
     version="1.0.0",
     lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(auth.router)
